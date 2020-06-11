@@ -1,8 +1,7 @@
-FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install -y python-pip python-dev build-essential
-COPY . /app
+FROM python:3.6-slim
+
 WORKDIR /app
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+COPY . /app
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+EXPOSE 5000
+CMD ["python","assignment.py"]
